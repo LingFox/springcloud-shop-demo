@@ -1,49 +1,21 @@
+server:
+  port: 8351
 spring:
-  application:
-    name: message-manage-client
-  thymeleaf: 
-    prefix: /WEB-INF/   #默认templates
-    suffix: .html
-    mode: HTML5
-    encoding: UTF-8
-    content-type: text/html
-    cache: false #开发时关闭缓存,不然没法看到实时页面
-  resources:
-    static-locations: /WEB-INF # 修改默认的静态寻址资源目录
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/smm?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    url: jdbc:mysql://127.0.0.1:3306/smm?useUnicode=true&characterEncoding=utf-8
     username: root
     password: root
-  cloud:
-    config:
-      uri: http://localhost:8351
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-mybatis:
-  mapper-locations: 'classpath*:mapper/**/*Mapper.xml'
-  type-aliases-package: 'org.message.manage.client.model'
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
-feign:
-  hystrix:
-    enabled: true
-server:
-  port: 8355
+  application:
+    name: message-manage-provider
 eureka:
   client:
-    healthcheck:
-      enabled: true
-    serviceUrl:
+    service-url:
       defaultZone: http://lingfox:huli0911@localhost:8352/eureka
   instance:
     prefer-ip-address: true
-    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}} 
-logging:
-  level:
-    org.springframework.cloud.sleuth: DEBUG #日志收集
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
