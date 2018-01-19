@@ -11,7 +11,7 @@ spring:
     username: root
     password: root
   application:
-    name: message-manage-provider-ahhahahhaha
+    name: message-manage-provider-hhhhhhhhhhhhhh
 eureka:
   client:
     service-url:
